@@ -8,7 +8,13 @@ public class CubeDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Cube cube))
+        {
             if (cube.IsFallen == false)
+            {
+                cube.ActivateFallenState();
+                cube.SetColor(ColorChanger.GetRandomColor());
                 CubeFell?.Invoke(cube);
+            }
+        }
     }
 }
