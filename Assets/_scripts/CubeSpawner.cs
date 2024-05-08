@@ -64,7 +64,7 @@ public class CubeSpawner : MonoBehaviour
     private void InitializePool()
     {
         _pool = new ObjectPool<Cube>(
-            createFunc: () => TryCreate(),
+            createFunc: () => Create(),
             actionOnGet: (cube) => ActionOnGet(cube),
             actionOnRelease: (cube) => cube.gameObject.SetActive(false),
             actionOnDestroy: (cube) => Destroy(cube.gameObject),
@@ -112,7 +112,7 @@ public class CubeSpawner : MonoBehaviour
         }
     }
 
-    private Cube TryCreate()
+    private Cube Create()
     {
         Cube cube = Instantiate(_cubePrefab);
         _cubes.Add(cube);
