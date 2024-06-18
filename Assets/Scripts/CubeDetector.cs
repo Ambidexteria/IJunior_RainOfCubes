@@ -11,7 +11,6 @@ public class CubeDetector : MonoBehaviour
         {
             if (cube.IsFallen == false)
             {
-                cube.ActivateFallenState();
                 cube.SetColor(ColorChanger.GetRandomColor());
                 CubeFell?.Invoke(cube);
             }

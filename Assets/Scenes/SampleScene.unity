@@ -123,6 +123,58 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &243897295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 243897296}
+  - component: {fileID: 243897297}
+  m_Layer: 0
+  m_Name: BombSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &243897296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243897295}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1758086946}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &243897297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243897295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e345f52ad79e54fbb5717cb5d2685f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 6838470456606586184, guid: 2dd657a9a7a44b44fb6f6562bf331bfb, type: 3}
+  _spawnZone: {fileID: 963072524}
+  _poolDefaultCapacity: 20
+  _poolMaxSize: 100
+  _spawnedObjects: []
+  _errorMaterial: {fileID: 2100000, guid: ef2eaa30d60a57e46a26c14af6329ec2, type: 2}
+  _cubeSpawner: {fileID: 1654729553}
+  _timeBeforeDeactivate: {x: 2, y: 5}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,15 +563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e6ff9c582ddb6468d63c0cd19283ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activateSpawn: 0
-  _cubePrefab: {fileID: 669135542330724237, guid: c2d3b7e9eb5687c44a05e0e87dc77f76, type: 3}
+  _prefab: {fileID: 669135542330724237, guid: c2d3b7e9eb5687c44a05e0e87dc77f76, type: 3}
   _spawnZone: {fileID: 963072524}
-  _spawnDelay: 0.01
-  _defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  _ground: {fileID: 2068136173}
   _poolDefaultCapacity: 20
   _poolMaxSize: 100
-  _cubes: []
+  _spawnedObjects: []
+  _errorMaterial: {fileID: 2100000, guid: ef2eaa30d60a57e46a26c14af6329ec2, type: 2}
+  _activateSpawn: 0
+  _spawnDelay: 0.1
+  _timeBeforeDeactivate: {x: 2, y: 5}
+  _defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  _ground: {fileID: 2068136173}
 --- !u!4 &1654729554
 Transform:
   m_ObjectHideFlags: 0
@@ -528,11 +582,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654729552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.708947, y: -15.941781, z: -1.6868114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 1758086946}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1758086945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758086946}
+  m_Layer: 0
+  m_Name: Spawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1758086946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758086945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.708947, y: 15.941781, z: 1.6868114}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1654729554}
+  - {fileID: 243897296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2068136170
@@ -609,4 +696,4 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 981556493}
   - {fileID: 963072523}
-  - {fileID: 1654729554}
+  - {fileID: 1758086946}
