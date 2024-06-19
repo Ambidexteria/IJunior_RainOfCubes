@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BombSpawner : GenericSpawner<Bomb>
@@ -23,18 +22,21 @@ public class BombSpawner : GenericSpawner<Bomb>
         _cubeSpawner.CubeReleased -= Spawn;
     }
 
-    public void Spawn(SpawnableObject objectToReplace)
+    public void Spawn(Cube cubeToReplace)
     {
         Bomb bomb = Spawn();
-        bomb.transform.position = objectToReplace.transform.position;
+        bomb.transform.position = cubeToReplace.transform.position;
+        bomb.Rigidbody.velocity = cubeToReplace.Rigidbody.velocity;
         StartCoroutine(DeactivateCoroutine(bomb));
     }
 
     private IEnumerator DeactivateCoroutine(Bomb bomb)
     {
         float delay = Random.Range(_timeBeforeDeactivate.x, _timeBeforeDeactivate.y);
+        StartCoroutine(bomb.FadeCoroutine(delay));
 
         yield return new WaitForSeconds(delay);
+
         bomb.Explode();
         ReturnToPool(bomb);
     }

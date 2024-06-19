@@ -5,15 +5,15 @@ public class Cube : SpawnableObject
 {
     private Material _material;
     private Color _defaultColor;
-    private Rigidbody _rigidbody;
 
     public bool IsFallen { get; private set; } = false;
+    public Rigidbody Rigidbody { get; private set; }
 
     private void Awake()
     {
         _material = GetComponent<Renderer>().material;
         _defaultColor = _material.color;
-        _rigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
     }
 
     public void ActivateFallenState()
@@ -25,7 +25,7 @@ public class Cube : SpawnableObject
     {
         SetDefaultColor();
         DeactivateFallenState();
-        _rigidbody.velocity = Vector3.zero;
+        Rigidbody.velocity = Vector3.zero;
     }
 
     public void SetColor(Color color)

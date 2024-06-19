@@ -10,27 +10,36 @@ public class CubeSpawner : GenericSpawner<Cube>
     [SerializeField] private float _spawnDelay = 0.5f;
     [SerializeField] private Vector2 _timeBeforeDeactivate = new Vector2(2f, 5f);
     [SerializeField] private Color _defaultColor;
-    [SerializeField] private CubeDetector _ground;
+    [SerializeField] private List<CubeDetector> _platforms;
 
     private bool _coroutineActive = false;
     private Coroutine _spawnCoroutine;
     private WaitForSeconds _wait;
 
-    public event UnityAction<SpawnableObject> CubeReleased;
+    public event UnityAction<Cube> CubeReleased;
 
     private void Start()
     {
-        if (_ground == null)
+        if (_platforms.Count == 0)
             throw new System.ArgumentNullException();
     }
 
     private void OnEnable()
     {
-        _ground.CubeFell += Deactivate;
+        if (_platforms.Count != 0)
+        {
+            foreach (var platform in _platforms)
+                platform.CubeFell += Deactivate;
+        }
     }
+
     private void OnDisable()
     {
-        _ground.CubeFell -= Deactivate;
+        if (_platforms.Count != 0)
+        {
+            foreach (var platform in _platforms)
+                platform.CubeFell -= Deactivate;
+        }
     }
 
     private void Update()
@@ -56,10 +65,12 @@ public class CubeSpawner : GenericSpawner<Cube>
     private IEnumerator SpawnCoroutine()
     {
         _wait = new WaitForSeconds(_spawnDelay);
+        Cube cube;
 
         while (_coroutineActive)
         {
-            Spawn();
+            cube = Spawn();
+            cube.transform.position = GetRandomSpawnPosition();
 
             yield return _wait;
         }
@@ -75,6 +86,7 @@ public class CubeSpawner : GenericSpawner<Cube>
         float delay = Random.Range(_timeBeforeDeactivate.x, _timeBeforeDeactivate.y);
 
         yield return new WaitForSeconds(delay);
+
         ReturnToPool(cube);
         CubeReleased?.Invoke(cube);
     }
